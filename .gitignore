@@ -1,0 +1,9 @@
+vendor
+y.output
+bin
+logs
+.coverage.*
+.vscode
+.idea
+scripts/result/
+.DS_Store

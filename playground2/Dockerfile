@@ -1,11 +1,11 @@
-FROM golang:1.14 as compiler
+FROM golang:1.19 as compiler
 
 ENV GO111MODULE=on \
     GOPROXY=https://goproxy.cn,direct
 
 WORKDIR /app
 
-COPY . .
+COPY .. .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o transfer .
 
@@ -22,4 +22,4 @@ COPY --from=compiler /app/publish .
 # 注意修改端口
 EXPOSE 8060
 
-ENTRYPOINT ["./transfer"]
+ENTRYPOINT ["./entrypoint.sh"]

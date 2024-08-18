@@ -1,0 +1,59 @@
+version: "3.4"
+services:
+  transfer1:
+    build:
+      context: ./../../
+      dockerfile: ./docker/Dockerfile
+    image: go-mysql-transfer:1.1.0
+    hostname: transfer-1
+    container_name: transfer-1
+    cap_add:
+      - ALL
+    ports:
+      - 8061:8060
+  transfer2:
+    build:
+      context: ./../../
+      dockerfile: ./docker/Dockerfile
+    image: go-mysql-transfer:1.1.0
+    hostname: transfer-2
+    container_name: transfer-2
+    cap_add:
+      - ALL
+    ports:
+      - 8061:8060
+  transfer3:
+    build:
+      context: ./../../
+      dockerfile: ./docker/Dockerfile
+    image: go-mysql-transfer:1.1.0
+    hostname: transfer-3
+    container_name: transfer-3
+    cap_add:
+      - ALL
+    ports:
+      - 8062:8060
+  mysql1:
+    image: bitnami/mysql:5.7
+    hostname: mysql-1
+    container_name: mysql-1
+    cap_add:
+      - ALL
+    ports:
+      - 7306:3306
+  mysql2:
+    image: bitnami/mysql:5.7
+    hostname: mysql-2
+    container_name: mysql-2
+    cap_add:
+      - ALL
+    ports:
+      - 7307:3306
+  prometheus:
+    image: prom/prometheus:latest
+    hostname: prometheus
+    container_name: proxy-prometheus
+    volumes:
+      - ./etc/prom/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
